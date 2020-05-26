@@ -14,25 +14,5 @@ namespace GeneCESI.Lib.Repositories
         public bool Roles { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-
-        public static void CreateUser(Users user)
-        {
-
-        }
-
-        public static void UpdateUser(Users user)
-        {
-
-        }
-
-        public static Users GetUser(string name, string firstName)
-        {
-
-        }
-
-        public static void DeleteUser(int id)
-        {
-
-        }
     }
 }
