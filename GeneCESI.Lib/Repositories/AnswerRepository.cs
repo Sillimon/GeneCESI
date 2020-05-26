@@ -1,4 +1,5 @@
 ﻿using GeneCESI.Lib.Object;
+using GeneCESI.Lib.Objects;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -55,7 +56,7 @@ namespace GeneCESI.Lib.Repositories
             try
             {
                 _command = new SqlCommand("DELETE FROM dbo.Answers WHERE Id = @ID", _connection as SqlConnection);
-                _command.Parameters.Add(new SqlParameter("@Id", entity.Id));
+                _command.Parameters.Add(new SqlParameter("@ID", entity.Id));
 
                 _connection.Open();
                 _command.ExecuteNonQuery();
@@ -78,7 +79,7 @@ namespace GeneCESI.Lib.Repositories
             try
             {
                 _command = new SqlCommand("SELECT * FROM dbo.Answers WHERE Id = @ID", _connection as SqlConnection);
-                _command.Parameters.Add(new SqlParameter("@Id", id));
+                _command.Parameters.Add(new SqlParameter("@ID", id));
 
                 _connection.Open();
                 SqlDataReader results = _command.ExecuteReader() as SqlDataReader;

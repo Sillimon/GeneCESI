@@ -8,7 +8,7 @@ using static GeneCESI.Lib.Helpers.EnumHelper;
 
 namespace GeneCESI.Lib.Objects
 {
-    class Question
+    public class Question
     {
         public int Id { get; set; }
         public string Label { get; set; }

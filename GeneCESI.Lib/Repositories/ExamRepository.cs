@@ -1,4 +1,5 @@
-﻿using GeneCESI.Lib.Objects;
+﻿
+using GeneCESI.Lib.Objects;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,33 +10,34 @@ using System.Threading.Tasks;
 
 namespace GeneCESI.Lib.Repositories
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IExamRepository : IRepository<Exam>
     {
 
     }
-    public class UserRepository : IUserRepository
+
+    public class ExamRepository : IExamRepository
     {
         public IDbConnection _connection { get; set; }
         public IDbCommand _command { get; set; }
 
-        public UserRepository(IDbConnection connection)
+        public ExamRepository(IDbConnection connection)
         {
             _connection = connection;
         }
 
         #region CRUD
-        public void Insert(User entity)
+        public void Insert(Exam entity)
         {
             try
             {
-                _command = new SqlCommand("INSERT INTO dbo.[Users](Name, Firstname, Roles, Email, Password) " +
-                    "VALUES(@Name, @Firstname, @Roles, @Email, @Password)", _connection as SqlConnection);
+                _command = new SqlCommand("INSERT INTO dbo.[Exams](Label, NbrQuestions, Time, End_Date, Tries) " +
+                    "VALUES(@Label, @NbrQuestions, @Time, @End_Date, @Tries)", _connection as SqlConnection);
 
-                _command.Parameters.Add(new SqlParameter("@Name", entity.Name));
-                _command.Parameters.Add(new SqlParameter("@Firstname", entity.Firstname));
-                _command.Parameters.Add(new SqlParameter("@Roles", entity.Roles));
-                _command.Parameters.Add(new SqlParameter("@Email", entity.Email));
-                _command.Parameters.Add(new SqlParameter("@Password", entity.Password));
+                _command.Parameters.Add(new SqlParameter("@Label", entity.Label));
+                _command.Parameters.Add(new SqlParameter("@NbrQuestions", entity.NbrQuestions));
+                _command.Parameters.Add(new SqlParameter("@Time", entity.Time));
+                _command.Parameters.Add(new SqlParameter("@End_Date", entity.EndDate));
+                _command.Parameters.Add(new SqlParameter("@Tries", entity.Tries));
 
                 _connection.Open();
                 _command.ExecuteNonQuery();
@@ -51,11 +53,11 @@ namespace GeneCESI.Lib.Repositories
             }
         }
 
-        public void Delete(User entity)
+        public void Delete(Exam entity)
         {
             try
             {
-                _command = new SqlCommand("DELETE FROM dbo.Users WHERE Id = @ID", _connection as SqlConnection);
+                _command = new SqlCommand("DELETE FROM dbo.Exams WHERE Id = @ID", _connection as SqlConnection);
                 _command.Parameters.Add(new SqlParameter("@ID", entity.Id));
 
                 _connection.Open();
@@ -72,13 +74,13 @@ namespace GeneCESI.Lib.Repositories
             }
         }
 
-        public User GetById(UInt32 id)
+        public Exam GetById(UInt32 id)
         {
-            User user = new User(String.Empty, String.Empty);
+            Exam exam = new Exam(String.Empty, String.Empty);
 
             try
             {
-                _command = new SqlCommand("SELECT * FROM dbo.Users WHERE Id = @ID", _connection as SqlConnection);
+                _command = new SqlCommand("SELECT * FROM dbo.Exams WHERE Id = @ID", _connection as SqlConnection);
                 _command.Parameters.Add(new SqlParameter("@ID", id));
 
                 _connection.Open();
@@ -100,16 +102,16 @@ namespace GeneCESI.Lib.Repositories
                 _connection?.Close();
             }
 
-            return user;
+            return exam;
         }
 
-        public IQueryable<User> GetAll()
+        public IQueryable<Exam> GetAll()
         {
-            IQueryable<User> users = new List<User>().AsQueryable();
+            IQueryable<Exam> users = new List<Exam>().AsQueryable();
 
             try
             {
-                _command = new SqlCommand("SELECT * FROM dbo.Users", _connection as SqlConnection);
+                _command = new SqlCommand("SELECT * FROM dbo.Exams", _connection as SqlConnection);
 
                 _connection.Open();
                 SqlDataReader results = _command.ExecuteReader() as SqlDataReader;

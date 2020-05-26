@@ -9,33 +9,33 @@ using System.Threading.Tasks;
 
 namespace GeneCESI.Lib.Repositories
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IQuestionRepository : IRepository<Question>
     {
 
     }
-    public class UserRepository : IUserRepository
+
+    public class QuestionRepository : IQuestionRepository
     {
         public IDbConnection _connection { get; set; }
         public IDbCommand _command { get; set; }
 
-        public UserRepository(IDbConnection connection)
+        public QuestionRepository(IDbConnection connection)
         {
             _connection = connection;
         }
 
         #region CRUD
-        public void Insert(User entity)
+        public void Insert(Question entity)
         {
             try
             {
-                _command = new SqlCommand("INSERT INTO dbo.[Users](Name, Firstname, Roles, Email, Password) " +
-                    "VALUES(@Name, @Firstname, @Roles, @Email, @Password)", _connection as SqlConnection);
+                _command = new SqlCommand("INSERT INTO dbo.[Questions](Id_Answers, Id_Exams, Label, Type) " +
+                    "VALUES(@Id_Answers, @Id_Exams, @Label, @Type)", _connection as SqlConnection);
 
-                _command.Parameters.Add(new SqlParameter("@Name", entity.Name));
-                _command.Parameters.Add(new SqlParameter("@Firstname", entity.Firstname));
-                _command.Parameters.Add(new SqlParameter("@Roles", entity.Roles));
-                _command.Parameters.Add(new SqlParameter("@Email", entity.Email));
-                _command.Parameters.Add(new SqlParameter("@Password", entity.Password));
+                _command.Parameters.Add(new SqlParameter("@Id_Answers", entity.FK_Answers));
+                _command.Parameters.Add(new SqlParameter("@Id_Exams", entity.FK_Exam));
+                _command.Parameters.Add(new SqlParameter("@Label", entity.Label));
+                _command.Parameters.Add(new SqlParameter("@Type", entity.Type));
 
                 _connection.Open();
                 _command.ExecuteNonQuery();
@@ -51,11 +51,11 @@ namespace GeneCESI.Lib.Repositories
             }
         }
 
-        public void Delete(User entity)
+        public void Delete(Question entity)
         {
             try
             {
-                _command = new SqlCommand("DELETE FROM dbo.Users WHERE Id = @ID", _connection as SqlConnection);
+                _command = new SqlCommand("DELETE FROM dbo.Questions WHERE Id = @ID", _connection as SqlConnection);
                 _command.Parameters.Add(new SqlParameter("@ID", entity.Id));
 
                 _connection.Open();
@@ -72,13 +72,13 @@ namespace GeneCESI.Lib.Repositories
             }
         }
 
-        public User GetById(UInt32 id)
+        public Question GetById(UInt32 id)
         {
-            User user = new User(String.Empty, String.Empty);
+            Question question = new Question(String.Empty, String.Empty);
 
             try
             {
-                _command = new SqlCommand("SELECT * FROM dbo.Users WHERE Id = @ID", _connection as SqlConnection);
+                _command = new SqlCommand("SELECT * FROM dbo.Questions WHERE Id = @ID", _connection as SqlConnection);
                 _command.Parameters.Add(new SqlParameter("@ID", id));
 
                 _connection.Open();
@@ -100,16 +100,16 @@ namespace GeneCESI.Lib.Repositories
                 _connection?.Close();
             }
 
-            return user;
+            return question;
         }
 
-        public IQueryable<User> GetAll()
+        public IQueryable<Question> GetAll()
         {
-            IQueryable<User> users = new List<User>().AsQueryable();
+            IQueryable<Question> questions = new List<Question>().AsQueryable();
 
             try
             {
-                _command = new SqlCommand("SELECT * FROM dbo.Users", _connection as SqlConnection);
+                _command = new SqlCommand("SELECT * FROM dbo.Questions", _connection as SqlConnection);
 
                 _connection.Open();
                 SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
@@ -130,7 +130,7 @@ namespace GeneCESI.Lib.Repositories
                 _connection?.Close();
             }
 
-            return users;
+            return questions;
         }
         #endregion
     }

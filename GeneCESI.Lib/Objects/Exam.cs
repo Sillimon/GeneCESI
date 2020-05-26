@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GeneCESI.Lib.Objects
 {
-    class Exam
+    public class Exam
     {
         public int Id { get; set; }
         public string Label { get; set; }
