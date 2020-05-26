@@ -41,9 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Object\Answers.cs" />
+    <Compile Include="Object\Answer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Object\Users.cs" />
+    <Compile Include="Object\User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
