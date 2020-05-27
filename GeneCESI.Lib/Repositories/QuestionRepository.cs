@@ -34,7 +34,7 @@ namespace GeneCESI.Lib.Repositories
             question.FK_Answers = new AnswerRepository(new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\murie\Documents\GeneCESI\GeneCESI_BDD.mdf;Integrated Security=True;Connect Timeout=30")).GetById((int)reader[1]);
             question.FK_Exam = new ExamRepository(new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\murie\Documents\GeneCESI\GeneCESI_BDD.mdf;Integrated Security=True;Connect Timeout=30")).GetById((int)reader[2]);
             question.Label = (string)reader[3];
-            question.Type = EnumHelper.ToEnum<QuestionType, int>((int)reader[3]);
+            question.Type = EnumHelper.ToEnum<QuestionType, int>((int)reader[4]);
 
             return question;
         }

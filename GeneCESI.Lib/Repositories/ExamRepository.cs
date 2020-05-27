@@ -33,8 +33,8 @@ namespace GeneCESI.Lib.Repositories
             exam.Label = (string)reader[1];
             exam.NbrQuestions = (int)reader[2];
             exam.Time = (int)reader[3];
-            exam.EndDate = (DateTime)reader[3];
-            exam.Tries = (int)reader[3];
+            exam.EndDate = (DateTime)reader[4];
+            exam.Tries = (int)reader[5];
 
             return exam;
         }
