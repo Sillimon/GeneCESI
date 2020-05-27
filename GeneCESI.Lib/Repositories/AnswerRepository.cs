@@ -32,7 +32,7 @@ namespace GeneCESI.Lib.Repositories
 
             answer.Id = (int)reader[0];
             answer.Correct = (string)reader[1];
-            answer.Statements = (string)reader[3];
+            answer.Statements = (string)reader[2];
 
             return answer;
         }
