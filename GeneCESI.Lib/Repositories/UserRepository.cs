@@ -85,7 +85,7 @@ namespace GeneCESI.Lib.Repositories
                 _connection?.Close();
             }
         }
-
+        
         public User GetById(int id)
         {
             User user = new User();
@@ -117,7 +117,7 @@ namespace GeneCESI.Lib.Repositories
 
             return user;
         }
-
+        
         public IQueryable<User> GetAll()
         {
             var users = new List<User>();

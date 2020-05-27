@@ -15,7 +15,7 @@ namespace GeneCESI.Lib.Repositories
     {
 
     }
-
+    
     public class AnswerRepository : IAnswerRepository
     {
         public IDbConnection _connection { get; set; }
@@ -45,8 +45,8 @@ namespace GeneCESI.Lib.Repositories
                 _command = new SqlCommand("INSERT INTO dbo.[Answers](Correct, Statements) " +
                     "VALUES(@Correct, @Statements)", _connection as SqlConnection);
 
-                _command.Parameters.Add(new SqlParameter("@Name", entity.Correct));
-                _command.Parameters.Add(new SqlParameter("@Roles", entity.Statements));
+                _command.Parameters.Add(new SqlParameter("@Correct", entity.Correct));
+                _command.Parameters.Add(new SqlParameter("@Statements", entity.Statements));
 
                 _connection.Open();
                 _command.ExecuteNonQuery();
@@ -114,7 +114,7 @@ namespace GeneCESI.Lib.Repositories
 
             return answer;
         }
-
+        
         public IQueryable<Answer> GetAll()
         {
             var answers = new List<Answer>();

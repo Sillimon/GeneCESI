@@ -117,7 +117,7 @@ namespace GeneCESI.Lib.Repositories
 
             return question;
         }
-
+        
         public IQueryable<Question> GetAll()
         {
             var questions = new List<Question>();
