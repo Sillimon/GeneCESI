@@ -10,7 +10,6 @@
 CREATE TABLE [dbo].[Answers] (
     [Id]         INT           IDENTITY (1, 1) NOT NULL,
     [Correct]    VARCHAR (MAX) DEFAULT ((0)) NOT NULL,
-    [Type]       INT           DEFAULT ((0)) NOT NULL,
     [Statements] VARCHAR (MAX) DEFAULT ((0)) NOT NULL,
     PRIMARY KEY CLUSTERED ([Id] ASC)
 );
