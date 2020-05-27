@@ -244,6 +244,9 @@ th {
   .navbar {
     display: none;
   }
+  .navbar #connexionLinks {
+      margin-right: auto;
+  }
   .btn > .caret,
   .dropup > .btn > .caret {
     border-top-color: #000 !important;
