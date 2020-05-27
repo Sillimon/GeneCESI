@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneCESI", "GeneCESI\GeneCE
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneCESI.Lib", "GeneCESI.Lib\GeneCESI.Lib.csproj", "{FC41CB2B-93C5-4C94-914B-1DD3A5F2465D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneCESI.TestIt", "GeneCESI.TestIt\GeneCESI.TestIt.csproj", "{6DE84C82-1E90-4CAE-8886-233EA996A9FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{FC41CB2B-93C5-4C94-914B-1DD3A5F2465D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC41CB2B-93C5-4C94-914B-1DD3A5F2465D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC41CB2B-93C5-4C94-914B-1DD3A5F2465D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DE84C82-1E90-4CAE-8886-233EA996A9FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DE84C82-1E90-4CAE-8886-233EA996A9FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DE84C82-1E90-4CAE-8886-233EA996A9FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DE84C82-1E90-4CAE-8886-233EA996A9FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
