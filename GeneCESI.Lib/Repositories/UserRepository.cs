@@ -71,10 +71,10 @@ namespace GeneCESI.Lib.Repositories
                 _connection?.Close();
             }
         }
-
+        
         public User GetById(UInt32 id)
         {
-            User user = new User(String.Empty, String.Empty);
+            User user = new User();
 
             try
             {
@@ -102,7 +102,7 @@ namespace GeneCESI.Lib.Repositories
 
             return user;
         }
-
+        
         public IQueryable<User> GetAll()
         {
             IQueryable<User> users = new List<User>().AsQueryable();

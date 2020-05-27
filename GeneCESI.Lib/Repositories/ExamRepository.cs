@@ -76,7 +76,7 @@ namespace GeneCESI.Lib.Repositories
 
         public Exam GetById(UInt32 id)
         {
-            Exam exam = new Exam(String.Empty, String.Empty);
+            Exam exam = new Exam();
 
             try
             {

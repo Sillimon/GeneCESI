@@ -26,6 +26,12 @@ namespace GeneCESI.Controllers
             return View();
         }
 
+        public ActionResult ReturnList()
+        {
+            List<GeneCESI.Lib.Objects.Exam> exams = new List<Lib.Objects.Exam>();
+            exams.Add(new Lib.Objects.Exam("test", 2, 30, new DateTime(2022, 11, 22), 2, 0));
+            return View(exams);
+        }
         // POST: SignIn/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)

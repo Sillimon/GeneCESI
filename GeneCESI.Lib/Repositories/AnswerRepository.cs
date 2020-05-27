@@ -13,7 +13,7 @@ namespace GeneCESI.Lib.Repositories
     {
 
     }
-
+    
     public class AnswerRepository : IAnswerRepository
     {
         public IDbConnection _connection { get; set; }
@@ -33,7 +33,7 @@ namespace GeneCESI.Lib.Repositories
                     "VALUES(@Correct, @Type, @Statements)", _connection as SqlConnection);
 
                 _command.Parameters.Add(new SqlParameter("@Name", entity.Correct));
-                _command.Parameters.Add(new SqlParameter("@Firstname", entity.Type));
+                //_command.Parameters.Add(new SqlParameter("@Firstname", entity.Type));
                 _command.Parameters.Add(new SqlParameter("@Roles", entity.Statements));
 
                 _connection.Open();
@@ -70,7 +70,7 @@ namespace GeneCESI.Lib.Repositories
                 _connection?.Close();
             }
         }
-
+        
         public Answer GetById(UInt32 id)
         {
             Answer answer = new Answer(String.Empty, String.Empty);
@@ -101,7 +101,7 @@ namespace GeneCESI.Lib.Repositories
 
             return answer;
         }
-
+        
         public IQueryable<Answer> GetAll()
         {
             IQueryable<Answer> users = new List<Answer>().AsQueryable();
