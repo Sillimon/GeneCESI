@@ -10,10 +10,10 @@ namespace GeneCESI.Lib.Objects
     {
         public int Id { get; set; }
         public string Correct { get; set; }
-        public string Type { get; set; }
         public string Statements { get; set; }
 
-        public Answer(string correct, string type, string statements, int id = 0)
-            => (this.Id, this.Correct, this.Type, this.Statements) = (id, correct, type, statements);
+        public Answer() { }
+        public Answer(string correct, string statements, int id = 0)
+            => (this.Id, this.Correct, this.Statements) = (id, correct, statements);
     }
 }
