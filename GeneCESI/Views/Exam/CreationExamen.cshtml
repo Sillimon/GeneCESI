@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Créer un examen";
+}
+
+<h2>Création d'un examen</h2>
+
+<form>
+    <div class="examCreationContainer">
+        <div class="creaExamTitles">
+            <div class="creaExamTitle">Créer un nouvel examen</div>
+            <div class="creaExamTitle">Créer un examen avec des questions aléatoires</div>
+        </div>
+        <div class="examPreview">
+            <h3>Nom de l'examen</h3>
+            <!-- Affichage des questions -->
+            <div class="questionContainer">
+                <h4>Question 1 : Est-ce que les ... ?</h4>
+                <p><input type="radio" /> Réponse 1</p>
+                <p><input type="radio" /> Réponse 2</p>
+                <p><input type="radio" /> Réponse 3</p>
+                <p><input type="radio" /> Réponse 4</p>
+            </div>
+            <div class="questionContainer">
+                <h4>Question 2 : Pourquoi le ... ?</h4>
+                <p><input type="radio" /> Réponse 1</p>
+                <p><input type="radio" /> Réponse 2</p>
+                <p><input type="radio" /> Réponse 3</p>
+                <p><input type="radio" /> Réponse 4</p>
+            </div>
+            <!-- Fin de l'affichage des questions -->
+            <input type="submit" value="Valider l'examen"/>
+        </div>
+        <div class="examCreation">
+            <p>Nombre de questions de l'examen : </p>   <div class="examPreviewBox">x</div>
+            <p>Durée(minutes) :</p>                     <div class="examPreviewBox">60</div>
+            <p>Date de fin :</p>                        <div class="examPreviewBox">29/05/2020</div>
+            <p>Nombre de tentatives autorisées : </p>   <div class="examPreviewBox">2</div>
+        </div>
+    </div>
+</form>

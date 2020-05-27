@@ -14,5 +14,10 @@ namespace GeneCESI.Controllers
             return View();
         }
 
+        public ActionResult CreationExamen()
+        {
+            return View();
+        }
+
     }
 }
