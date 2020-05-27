@@ -1,5 +1,4 @@
-﻿using GeneCESI.Lib.Object;
-using GeneCESI.Lib.Objects;
+﻿using GeneCESI.Lib.Objects;
 using System;
 using System.Collections.Generic;
 using System.Data;

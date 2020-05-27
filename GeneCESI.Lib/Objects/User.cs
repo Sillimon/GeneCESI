@@ -16,7 +16,7 @@ namespace GeneCESI.Lib.Objects
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public User(int id, string name, string firstname, bool roles, string email, string password)
+        public User(string name, string firstname, bool roles, string email, string password, int id = 0)
             => (this.Id, this.Name, this.Firstname, this.Roles, this.Email, this.Password) = (id, name, firstname, roles, email, password);
     }
 }

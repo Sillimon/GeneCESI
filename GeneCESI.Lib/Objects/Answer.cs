@@ -13,7 +13,7 @@ namespace GeneCESI.Lib.Objects
         public string Type { get; set; }
         public string Statements { get; set; }
 
-        public Answer(int id, string correct, string type, string statements)
+        public Answer(string correct, string type, string statements, int id = 0)
             => (this.Id, this.Correct, this.Type, this.Statements) = (id, correct, type, statements);
     }
 }
