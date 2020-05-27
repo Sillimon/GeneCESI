@@ -6835,3 +6835,52 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+/* css page d'examen */
+
+.examContainer { /*conteneur de tout l'affichage de l'examen*/
+    padding:2px;
+    width: 100%;
+    display: flex;
+    align-content: flex-start;
+}
+
+.questionAnswerContainer { /* conteneur du nom de l'examen, des questions et de la validation*/
+    padding: 2px;
+    width: 75%;
+    border: solid black 1px;
+    margin: 5px;
+}
+
+.questionContainer { /* conteneur d'une question et ses réponses */
+    padding: 2px;
+    margin: 2px;
+    width: 100%;
+}
+.questionContainer p{
+    margin-left:16px;
+}
+
+.infoContainer { /* conteneur à gauche contenant les infos de l'exam en cours*/
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 64px 2px 64px 2px;
+    margin: 5px;
+    width: 20%;
+    border: solid black 1px;
+    display: flex;
+}
+
+.sendAnswersBar { /* conteneur de l'input submit*/
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    margin: 2px;
+    width: 100%;
+}
+
+.examName{
+    display:flex;
+    justify-content:center;
+}
