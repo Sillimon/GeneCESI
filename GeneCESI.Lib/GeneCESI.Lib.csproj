@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\CommonHelpers.cs" />
     <Compile Include="Helpers\EnumHelper.cs" />
     <Compile Include="Helpers\sessionData.cs" />
     <Compile Include="Objects\Answer.cs" />
