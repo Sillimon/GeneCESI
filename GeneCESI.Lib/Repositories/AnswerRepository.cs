@@ -1,4 +1,5 @@
-﻿using GeneCESI.Lib.Objects;
+﻿using GeneCESI.Lib.Helpers;
+using GeneCESI.Lib.Objects;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static GeneCESI.Lib.Helpers.EnumHelper;
 
 namespace GeneCESI.Lib.Repositories
 {
@@ -24,16 +26,26 @@ namespace GeneCESI.Lib.Repositories
             _connection = connection;
         }
 
+        public Answer ReaderToObject(IDataReader reader)
+        {
+            var answer = new Answer();
+
+            answer.Id = (int)reader[0];
+            answer.Correct = (string)reader[1];
+            answer.Statements = (string)reader[3];
+
+            return answer;
+        }
+
         #region CRUD
         public void Insert(Answer entity)
         {
             try
             {
-                _command = new SqlCommand("INSERT INTO dbo.[Answers](Correct, Type, Statements) " +
-                    "VALUES(@Correct, @Type, @Statements)", _connection as SqlConnection);
+                _command = new SqlCommand("INSERT INTO dbo.[Answers](Correct, Statements) " +
+                    "VALUES(@Correct, @Statements)", _connection as SqlConnection);
 
                 _command.Parameters.Add(new SqlParameter("@Name", entity.Correct));
-                _command.Parameters.Add(new SqlParameter("@Firstname", entity.Type));
                 _command.Parameters.Add(new SqlParameter("@Roles", entity.Statements));
 
                 _connection.Open();
@@ -71,9 +83,10 @@ namespace GeneCESI.Lib.Repositories
             }
         }
 
-        public Answer GetById(UInt32 id)
+        public Answer GetById(int id)
         {
-            Answer answer = new Answer(String.Empty, String.Empty);
+            Answer answer = new Answer();
+            answer.Id = (int)id;
 
             try
             {
@@ -85,7 +98,7 @@ namespace GeneCESI.Lib.Repositories
 
                 while (results.Read())
                 {
-                    //TODO
+                    answer = ReaderToObject(results);
                 }
                 results?.Close();
             }
@@ -104,7 +117,7 @@ namespace GeneCESI.Lib.Repositories
 
         public IQueryable<Answer> GetAll()
         {
-            IQueryable<Answer> users = new List<Answer>().AsQueryable();
+            var answers = new List<Answer>();
 
             try
             {
@@ -114,9 +127,8 @@ namespace GeneCESI.Lib.Repositories
                 SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
 
                 while (results.Read())
-                {
-                    //TODO
-                }
+                    answers.Add(ReaderToObject(results));
+
                 results?.Close();
             }
             catch (Exception ex)
@@ -129,7 +141,7 @@ namespace GeneCESI.Lib.Repositories
                 _connection?.Close();
             }
 
-            return users;
+            return answers.AsQueryable();
         }
         #endregion
     }

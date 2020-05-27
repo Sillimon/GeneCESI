@@ -1,4 +1,5 @@
-﻿using GeneCESI.Lib.Objects;
+﻿using GeneCESI.Lib.Helpers;
+using GeneCESI.Lib.Objects;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static GeneCESI.Lib.Helpers.EnumHelper;
 
 namespace GeneCESI.Lib.Repositories
 {
@@ -22,6 +24,19 @@ namespace GeneCESI.Lib.Repositories
         public QuestionRepository(IDbConnection connection)
         {
             _connection = connection;
+        }
+
+        public Question ReaderToObject(IDataReader reader)
+        {
+            var question = new Question();
+
+            question.Id = (int)reader[0];
+            question.FK_Answers = new AnswerRepository(new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\murie\Documents\GeneCESI\GeneCESI_BDD.mdf;Integrated Security=True;Connect Timeout=30")).GetById((int)reader[1]);
+            question.FK_Exam = new ExamRepository(new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\murie\Documents\GeneCESI\GeneCESI_BDD.mdf;Integrated Security=True;Connect Timeout=30")).GetById((int)reader[2]);
+            question.Label = (string)reader[3];
+            question.Type = EnumHelper.ToEnum<QuestionType, int>((int)reader[3]);
+
+            return question;
         }
 
         #region CRUD
@@ -72,9 +87,9 @@ namespace GeneCESI.Lib.Repositories
             }
         }
 
-        public Question GetById(UInt32 id)
+        public Question GetById(int id)
         {
-            Question question = new Question(String.Empty, String.Empty);
+            Question question = new Question();
 
             try
             {
@@ -86,7 +101,7 @@ namespace GeneCESI.Lib.Repositories
 
                 while (results.Read())
                 {
-                    //TODO
+                    question = ReaderToObject(results);
                 }
                 results?.Close();
             }
@@ -105,7 +120,7 @@ namespace GeneCESI.Lib.Repositories
 
         public IQueryable<Question> GetAll()
         {
-            IQueryable<Question> questions = new List<Question>().AsQueryable();
+            var questions = new List<Question>();
 
             try
             {
@@ -115,9 +130,8 @@ namespace GeneCESI.Lib.Repositories
                 SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
 
                 while (results.Read())
-                {
-                    //TODO
-                }
+                    questions.Add(ReaderToObject(results));
+
                 results?.Close();
             }
             catch (Exception ex)
@@ -130,7 +144,7 @@ namespace GeneCESI.Lib.Repositories
                 _connection?.Close();
             }
 
-            return questions;
+            return questions.AsQueryable();
         }
         #endregion
     }

@@ -25,6 +25,20 @@ namespace GeneCESI.Lib.Repositories
             _connection = connection;
         }
 
+        public Exam ReaderToObject(IDataReader reader)
+        {
+            var exam = new Exam();
+
+            exam.Id = (int)reader[0];
+            exam.Label = (string)reader[1];
+            exam.NbrQuestions = (int)reader[2];
+            exam.Time = (int)reader[3];
+            exam.EndDate = (DateTime)reader[3];
+            exam.Tries = (int)reader[3];
+
+            return exam;
+        }
+
         #region CRUD
         public void Insert(Exam entity)
         {
@@ -74,9 +88,9 @@ namespace GeneCESI.Lib.Repositories
             }
         }
 
-        public Exam GetById(UInt32 id)
+        public Exam GetById(int id)
         {
-            Exam exam = new Exam(String.Empty, String.Empty);
+            Exam exam = new Exam();
 
             try
             {
@@ -88,7 +102,7 @@ namespace GeneCESI.Lib.Repositories
 
                 while (results.Read())
                 {
-                    //TODO
+                    exam = ReaderToObject(results);
                 }
                 results?.Close();
             }
@@ -107,7 +121,7 @@ namespace GeneCESI.Lib.Repositories
 
         public IQueryable<Exam> GetAll()
         {
-            IQueryable<Exam> users = new List<Exam>().AsQueryable();
+            var exams = new List<Exam>();
 
             try
             {
@@ -117,9 +131,8 @@ namespace GeneCESI.Lib.Repositories
                 SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
 
                 while (results.Read())
-                {
-                    //TODO
-                }
+                    exams.Add(ReaderToObject(results));
+
                 results?.Close();
             }
             catch (Exception ex)
@@ -132,7 +145,7 @@ namespace GeneCESI.Lib.Repositories
                 _connection?.Close();
             }
 
-            return users;
+            return exams.AsQueryable();
         }
         #endregion
     }

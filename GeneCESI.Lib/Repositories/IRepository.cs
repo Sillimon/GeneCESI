@@ -12,7 +12,9 @@ namespace GeneCESI.Lib.Repositories
         IDbConnection _connection { get; set; }
         void Insert(T entity);
         void Delete(T entity);
-        T GetById(UInt32 id);
+        T GetById(int id);
         IQueryable<T> GetAll();
+
+        T ReaderToObject(IDataReader reader);
     }
 }

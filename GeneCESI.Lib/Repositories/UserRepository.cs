@@ -23,6 +23,20 @@ namespace GeneCESI.Lib.Repositories
             _connection = connection;
         }
 
+        public User ReaderToObject(IDataReader reader)
+        {
+            var user = new User();
+
+            user.Id = (int)reader[0];
+            user.Name = (string)reader[1];
+            user.Firstname = (string)reader[2];
+            user.Roles = (bool)reader[3];
+            user.Email = (string)reader[4];
+            user.Password = (string)reader[5];
+
+            return user;
+        }
+
         #region CRUD
         public void Insert(User entity)
         {
@@ -72,9 +86,10 @@ namespace GeneCESI.Lib.Repositories
             }
         }
 
-        public User GetById(UInt32 id)
+        public User GetById(int id)
         {
-            User user = new User(String.Empty, String.Empty);
+            User user = new User();
+            user.Id = id;
 
             try
             {
@@ -86,7 +101,7 @@ namespace GeneCESI.Lib.Repositories
 
                 while (results.Read())
                 {
-                    //TODO
+                    user = ReaderToObject(results);
                 }
                 results?.Close();
             }
@@ -105,7 +120,7 @@ namespace GeneCESI.Lib.Repositories
 
         public IQueryable<User> GetAll()
         {
-            IQueryable<User> users = new List<User>().AsQueryable();
+            var users = new List<User>();
 
             try
             {
@@ -115,9 +130,8 @@ namespace GeneCESI.Lib.Repositories
                 SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
 
                 while (results.Read())
-                {
-                    //TODO
-                }
+                    users.Add(ReaderToObject(results));
+
                 results?.Close();
             }
             catch (Exception ex)
@@ -130,7 +144,7 @@ namespace GeneCESI.Lib.Repositories
                 _connection?.Close();
             }
 
-            return users;
+            return users.AsQueryable();
         }
         #endregion
     }
