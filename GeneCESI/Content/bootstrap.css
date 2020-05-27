@@ -6930,8 +6930,54 @@ button.close {
     align-items: center;
 }
 
-.examPreviewBox{
-    border:1px black solid;
-    padding : 3px;
+.examPreviewBox {
+    width:70%;
+    display:flex;
+    align-content:center;
+}
+
+.examPreviewBox2{
     
+    width:29%;
+    padding : 3px;
+    font-weight:bold;
+}
+
+
+.examRulesBox {
+    padding: 1em 3em 1em 3em;
+    border-top: 1px black solid;
+    border-bottom: 1px black solid;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.examRulesBox select{
+    width:50%;
+}
+
+.examRulesBox2 {
+    margin:5px;
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+}
+
+.examRulesBox input[type=text]{
+    width:100%;
+
+    padding:10px;
+}
+
+.questionAnswerBox {
+    margin:16px 0px 16px 0px;
+    width:90%;
+    border: 1px black solid;
+    display: flex;
+    justify-content:center;
+    align-items:center;
 }
