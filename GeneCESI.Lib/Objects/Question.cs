@@ -18,7 +18,7 @@ namespace GeneCESI.Lib.Objects
 
         public Exam FK_Exam { get; set; }
 
-        public Question(int id, string label, QuestionType type, Answer answer, Exam exam)
+        public Question(string label, QuestionType type, Answer answer, Exam exam, int id = 0)
            => (this.Id, this.Label, this.Type, this.FK_Answers, this.FK_Exam) = (id, label, type, answer, exam);
     }
 }
