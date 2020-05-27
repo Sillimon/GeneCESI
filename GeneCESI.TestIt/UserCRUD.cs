@@ -37,7 +37,7 @@ namespace GeneCESI.TestIt
         }
 
         [TestMethod]
-        public static bool UserGetById()
+        public bool UserGetById()
         {
             var user = new User();
 
@@ -47,7 +47,7 @@ namespace GeneCESI.TestIt
         }
 
         [TestMethod]
-        public static bool UserGetAll()
+        public bool UserGetAll()
         {
             var users = new List<User>();
 
