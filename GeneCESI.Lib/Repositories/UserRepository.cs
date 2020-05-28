@@ -149,7 +149,7 @@ namespace GeneCESI.Lib.Repositories
         }
         #endregion
 
-        public User userLoggin(string email, string password)
+        public User UserLoggin(string email, string password)
         {
             User loggingInUser = new User();
             try
