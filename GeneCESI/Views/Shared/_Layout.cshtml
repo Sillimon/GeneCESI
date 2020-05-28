@@ -36,26 +36,27 @@
 
                             <ul class="dropdown-menu dropdown-menu-right mt-2">
                                 <li class="px-30 py-20">
-                                    <form class="form" role="form">
-                                        <div class="form-group">
-                                            <input id="emailInput" placeholder="Email" class="form-control form-control-sm" type="text" required="">
-                                        </div>
-                                        <div class="form-group">
-                                            <input id="passwordInput" placeholder="Password" class="form-control form-control-sm" type="text" required="">
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">@Html.ActionLink("Se connecter", "Index", "LogIn")</button>
-                                        </div>
-                                        <div class="form-group text-center">
-                                            @*Rajouter un mot de passe oublie dans les options action link*@
-                                            <small><a href="#" data-toggle="modal" data-target="#modalPassword">Forgot password?</a></small>
-                                        </div>
-                                        <div class="form-group text-center">
+                                    @using (Html.BeginForm("ToLogin", "SignIn", FormMethod.Post))
+                                    {
+                                        <form class="form" role="form">
+                                            <div class="form-group">
+                                                <input type="email" id="emailInput" name="Email" placeholder="Email" class="form-control form-control-sm" type="text" required="">
+                                                @Html.ValidationMessage("Email")
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" id="passwordInput" name="Password" placeholder="Password" class="form-control form-control-sm" type="text" required="">
+                                                @Html.ValidationMessage("Password")
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" value="Se connecter" class="btn btn-primary btn-block"/>
+                                            </div>
+                                            <div class="form-group text-center">
 
-                                            <small><a href="#" data-toggle="modal" data-target="#">@Html.ActionLink("S'inscrire", "Index", "SignIn")</a></small>
-                                        </div>
-                                    </form>
-                                </li>
+                                                <small>@Html.ActionLink("Mot de passe oublié?", "Index", "SignUp")</small>
+                                            </div>
+                                        </form>
+                                    }
+                                    </li>
                             </ul>
                         </li>
                     </ul>

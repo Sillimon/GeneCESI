@@ -28,7 +28,7 @@ namespace GeneCESI.Controllers
                 }
             }
             repoUser.Insert(new User(Name, Firstname, Roles, Email, Password));
-            return RedirectToAction("Index", "LogIn", new { area = "" });
+            return RedirectToAction("Index", "SignIn", new { area = "" });
         }
 
         public ActionResult error()
