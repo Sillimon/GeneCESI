@@ -1,4 +1,5 @@
-﻿using GeneCESI.Lib.Objects;
+﻿using GeneCESI.Lib.Helpers;
+using GeneCESI.Lib.Objects;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -49,7 +50,7 @@ namespace GeneCESI.Lib.Repositories
                 _command.Parameters.Add(new SqlParameter("@Firstname", entity.Firstname));
                 _command.Parameters.Add(new SqlParameter("@Roles", entity.Roles));
                 _command.Parameters.Add(new SqlParameter("@Email", entity.Email));
-                _command.Parameters.Add(new SqlParameter("@Password", entity.Password));
+                _command.Parameters.Add(new SqlParameter("@Password", CommonHelpers.ComputeHash(entity.Password)));
 
                 _connection.Open();
                 _command.ExecuteNonQuery();
