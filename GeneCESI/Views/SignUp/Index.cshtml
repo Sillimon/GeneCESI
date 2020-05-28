@@ -1,60 +1,67 @@
 ﻿@model GeneCESI.Lib.Objects.User
 @{
-    ViewBag.Title = "SignIn";
+    ViewBag.Title = "SignUp";
 }
+
+<h2>Inscription</h2>
 
 @using (Html.BeginForm("Register", "Signup", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    <table width="20%" bgcolor="0099CC" align="center">
+<div class="form-horizontal">
+    <hr />
 
-        <div class="form-group">
-            @Html.Label("Nom", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Name, new { @class = "text", required = "required" })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.Label("Nom", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Name, new { @class = "text", required = "required" })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.Label("Prénom", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Firstname, new { @class = "text", required = "required" })
-                @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.Label("Prénom", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Firstname, new { @class = "text", required = "required" })
+            @Html.ValidationMessageFor(model => model.Firstname, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Email, new { @class = "text", type = "email", required = "required" })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Email, new { @class = "text", type = "email", required = "required" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Password, new { @class = "text", type = "password", required = "required" })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Password, new { @class = "text", type = "password", required = "required" })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
         </div>
+    </div>
 
-        <div class="form-group">
-            @Html.Label("Etes-vous un enseignant ou un étudiant?", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                Enseignant
-                @Html.RadioButtonFor(model => model.Roles, true)
-                Etudiant
-                @Html.RadioButtonFor(model => model.Roles, false)
-            </div>
+    <div class="form-group">
+        @Html.Label("Etes-vous un enseignant ou un étudiant?", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            Enseignant
+            @Html.RadioButtonFor(model => model.Roles, true)
+            Etudiant
+            @Html.RadioButtonFor(model => model.Roles, false)
         </div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Créer" class="btn btn-default" />
-            </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Créer un compte" class="btn btn-default" />
         </div>
+    </div>
 
-    </table>
+</div>
 }
+
+<div>
+    Vous avez déjà un compte? Connectez-vous @Html.ActionLink("ici", "Index", "SignUp")
+</div>
