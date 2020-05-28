@@ -22,12 +22,12 @@ namespace GeneCESI.Controllers
         {
                 if (repoUser.UserLoggin(Email,Password)!=null)
                 {
-                //TODO: gérer les sessions
                     Session["Id"] = repoUser.UserLoggin(Email, Password).Id;
                     Session["Firstname"] = repoUser.UserLoggin(Email, Password).Firstname;
                     Session["Email"] = repoUser.UserLoggin(Email, Password).Email;
                     Session["Roles"] = repoUser.UserLoggin(Email, Password).Roles;
-                    return RedirectToAction("Index", "Home", new { area = "" });
+
+                return RedirectToAction("Index", "Home", new { area = "" });
                 }
                 else
                 {
