@@ -148,5 +148,35 @@ namespace GeneCESI.Lib.Repositories
             return users.AsQueryable();
         }
         #endregion
+
+        public User userLoggin(string email, string password)
+        {
+            User loggingInUser = new User();
+            try
+            {
+                _command = new SqlCommand("SELECT * FROM dbo.Users WHERE Email = @email AND Password = @password", _connection as SqlConnection);
+                _command.Parameters.Add(new SqlParameter("@email", email));
+                _command.Parameters.Add(new SqlParameter("@password", CommonHelpers.ComputeHash(password)));
+
+                _connection.Open();
+                SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
+
+                while (results.Read())
+                    loggingInUser = ReaderToObject(results);
+
+                results?.Close();
+            }
+            catch (Exception ex)
+            {
+
+            }
+            finally
+            {
+                _command?.Dispose();
+                _connection?.Close();
+            }
+
+            return loggingInUser;
+        }
     }
 }
