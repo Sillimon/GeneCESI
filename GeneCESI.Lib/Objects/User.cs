@@ -19,5 +19,7 @@ namespace GeneCESI.Lib.Objects
         public User() { }
         public User(string name, string firstname, bool roles, string email, string password, int id = 0)
             => (this.Id, this.Name, this.Firstname, this.Roles, this.Email, this.Password) = (id, name, firstname, roles, email, password);
+
+        public bool isAdmin => this.Roles;
     }
 }
