@@ -17,6 +17,5 @@ namespace GeneCESI.Controllers
             List<Exam> exams = repoExam.GetAll().ToList();
             return View(exams);
         }
-
     }
 }

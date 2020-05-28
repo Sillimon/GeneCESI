@@ -20,17 +20,28 @@ namespace GeneCESI.Controllers
                 new Answer("reponse D", "reponse A;reponse B;reponse C;reponse D"),exam));
             return View(questions);
         }
-
-        public void SendExam_OnButtonClick()
+        [HttpPost]
+        public ActionResult SendExam_OnButtonClick(List<Question> questions)
         {
             //Récuperer les données de la view
             //Envoyer les réponses a l'examen sur la BDD
             //Renvoyer une view qui indique que l'examen a bien été posté.
+            return View();
         }
 
         public ActionResult CreationExamen()
         {
             return View();
+        }
+
+        public ActionResult CreateExam()
+        {
+            return View();
+        }
+
+        public void CreateRandomExam_OnButtonClick()
+        {
+
         }
 
     }

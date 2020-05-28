@@ -5,10 +5,19 @@
 }
 
 <h2>Index</h2>
+<div class="creaExamTitles">
+    @using (Html.BeginForm("CreateExam", "Exam", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "examCreationContainer" }))
+    {
+        @Html.ValidationSummary(true);
+        <input class="creaExamTitle" type="submit" value="Créer un examen" />
+    }
+    @using (Html.BeginForm("CreateRandomExam_OnButtonClick", "Exam", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "examCreationContainer" }))
+    {
+        @Html.ValidationSummary(true);
+        <input class="creaExamTitle" type="submit" value="Créer un examen avec des questions aléatoires" />
+    }
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>

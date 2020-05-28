@@ -1,64 +1,67 @@
 ﻿@model IEnumerable<GeneCESI.Lib.Objects.Question>
 
-
 @{
     ViewBag.Title = "DisplayExamen";
 }
 
 
 
-    @using (Html.BeginForm("SendExam_OnButtonClick", "Exam",new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post,new {@class= "examContainer" }))
-    {
-        @Html.ValidationSummary(true);
-        <div class="questionAnswerContainer">
-            <div class="examName">
-                @Html.DisplayFor(modelItem => Model.ElementAt(0).FK_Exam.Label)
-            </div>
-
-            @foreach (var item in Model)
-             {
-
-                <div class="questionContainer">
-                    @Html.DisplayFor(modelItem => item.Label)
-                    @{var listStatement = GeneCESI.Lib.Helpers.CommonHelpers.StatementsToString(item.FK_Answers.Statements);}
-
-                    @if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.YesNo)
-                    {
-                        foreach (var x in listStatement)
-                        {<p><input type="radio" name="YesNo" /> @Html.DisplayFor(modelItem => x)</p>}
-                    }
-                    else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.UniqueChoice)
-                    {
-                        foreach (var x in listStatement)
-                        {<p><input type="radio" name="UniqueChoice" /> @Html.DisplayFor(modelItem => x)</p>}
-                    }
-                    else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.MultipleChoice)
-                    {
-                        foreach (var x in listStatement)
-                        {<p><input type="checkbox" name="MultipleChoice" /> @Html.DisplayFor(modelItem => x)</p>}
-                    }
-                    else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.Textual)
-                    {
-                        foreach (var x in listStatement)
-                        {<p><input type="text" name="Textual" /> @Html.DisplayFor(modelItem => x)</p>}
-                    }
-                    else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.Cloze)
-                    {
-                        foreach (var x in listStatement)
-                        {<p><input type="text" name="Cloze" /> @Html.DisplayFor(modelItem => x)</p>}
-                    }
-                </div>
-             }
-
-            <div class="sendAnswersBar">
-                <input type="submit" value="Envoyer les réponses" />
-            </div>
+@using (Html.BeginForm("SendExam_OnButtonClick", "Exam", FormMethod.Post, new { @class = "examContainer" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true);
+    <div class="questionAnswerContainer">
+        <div class="examName">
+            @Html.DisplayFor(modelItem => Model.ElementAt(0).FK_Exam.Label)
         </div>
 
-        <div class="infoContainer">
-            <div>Informations générales de l'examen</div>
-            <div>Durée : @Html.DisplayFor(modelItem => Model.ElementAt(0).FK_Exam.Time) minutes</div>
-            <div>Nombre de tentatives : @Html.DisplayFor(modelItem => Model.ElementAt(0).FK_Exam.Tries)</div>
-            <div>Date de fin : @Html.DisplayFor(modelItem => Model.ElementAt(0).FK_Exam.EndDate)</div>
-        </div>
+        @foreach (var item in Model)
+        {
+
+    <div class="questionContainer">
+        @Html.DisplayFor(modelItem => item.Label)
+        @Html.HiddenFor(modelItem => item.Label)
+        @{var listStatement = GeneCESI.Lib.Helpers.CommonHelpers.StatementsToString(item.FK_Answers.Statements);}
+
+        @if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.YesNo)
+        {
+            foreach (var x in listStatement)
+            {<p><input type="radio" name="YesNo" /> @Html.DisplayFor(modelItem => x)</p>
+            @Html.HiddenFor(modelItem => x)
+        }
     }
+    else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.UniqueChoice)
+    {
+        foreach (var x in listStatement)
+        {<p><input type="radio" name="UniqueChoice" /> @Html.DisplayFor(modelItem => x)</p>@Html.HiddenFor(modelItem => x)}
+}
+else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.MultipleChoice)
+{
+    foreach (var x in listStatement)
+    {<p><input type="checkbox" name="MultipleChoice" /> @Html.DisplayFor(modelItem => x)</p>@Html.HiddenFor(modelItem => x)}
+}
+else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.Textual)
+{
+foreach (var x in listStatement)
+{<p><input type="text" name="Textual" /> @Html.DisplayFor(modelItem => x)</p>@Html.HiddenFor(modelItem => x)}
+}
+else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.Cloze)
+{
+foreach (var x in listStatement)
+{<p><input type="text" name="Cloze" /> @Html.DisplayFor(modelItem => x)</p>@Html.HiddenFor(modelItem => x)}
+}
+    </div>
+        }
+
+        <div class="sendAnswersBar">
+            <input type="submit" value="Envoyer les réponses" />
+        </div>
+    </div>
+
+    <div class="infoContainer">
+        <div>Informations générales de l'examen</div>
+        <div>Durée : @Html.DisplayFor(modelItem => Model.ElementAt(0).FK_Exam.Time) minutes</div>
+        <div>Nombre de tentatives : @Html.DisplayFor(modelItem => Model.ElementAt(0).FK_Exam.Tries)</div>
+        <div>Date de fin : @Html.DisplayFor(modelItem => Model.ElementAt(0).FK_Exam.EndDate)</div>
+    </div>
+}
