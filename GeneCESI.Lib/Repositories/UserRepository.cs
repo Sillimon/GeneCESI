@@ -161,6 +161,9 @@ namespace GeneCESI.Lib.Repositories
                 _connection.Open();
                 SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
 
+                if (!results.HasRows)
+                    return null;
+
                 while (results.Read())
                     loggingInUser = ReaderToObject(results);
 
