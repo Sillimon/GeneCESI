@@ -14,8 +14,8 @@ namespace GeneCESI.TestIt
     [TestClass]
     class QuestionCRUD
     {
-        static IRepository<Question> _questionRepo = new QuestionRepository(new SqlConnection(@"Data Source = (LocalDb)\MSSQLLocalDB;  Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False; AttachDbFilename=" +
-           @"C:\Users\murie\AppData" +
+        static IRepository<Question> _questionRepo = new QuestionRepository(new SqlConnection(@"Data Source = (LocalDb)\MSSQLLocalDB;  Integrated Security=SSPI;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False; AttachDbFilename=" +
+           Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
            @"\GeneCESI_BDD.mdf;"));
 
         [TestMethod]

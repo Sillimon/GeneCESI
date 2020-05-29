@@ -12,8 +12,8 @@ namespace GeneCESI.Controllers
 {
     public class SignUpController : Controller
     {
-        UserRepository repoUser = new UserRepository(new SqlConnection(@"Data Source = (LocalDb)\MSSQLLocalDB;  Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False; AttachDbFilename=" +
-           @"C:\Users\murie\AppData" +
+        UserRepository repoUser = new UserRepository(new SqlConnection(@"Data Source = (LocalDb)\MSSQLLocalDB;  Integrated Security=SSPI;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False; AttachDbFilename=" +
+           Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
            @"\GeneCESI_BDD.mdf;"));
 
         public ActionResult Index()

@@ -14,8 +14,8 @@ namespace GeneCESI.Controllers
     {
         public ActionResult Index()
         {
-            ExamRepository repoExam = new ExamRepository(new SqlConnection(@"Data Source = (LocalDb)\MSSQLLocalDB;  Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False; AttachDbFilename=" +
-           @"C:\Users\murie\AppData" +
+            ExamRepository repoExam = new ExamRepository(new SqlConnection(@"Data Source = (LocalDb)\MSSQLLocalDB;  Integrated Security=SSPI;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False; AttachDbFilename=" +
+           Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
            @"\GeneCESI_BDD.mdf;"));
             List<Exam> exams = repoExam.GetAll().ToList();
             return View(exams);
