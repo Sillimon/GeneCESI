@@ -31,7 +31,15 @@
                             if (Session["Id"] != null)
                             {
                                 <li class="connexionLinks">@Html.ActionLink("Se déconnecter", "ToLogout", "SignIn")</li>
-                                <li class="connexionLinks">Bonjour @Session["Firstname"] !</li>
+                                <li class="connexionLinks" style="color:white;">Bonjour @Session["Firstname"]</li>
+                                if (Session["Roles"].ToString().Contains("True"))
+                                {
+                                    <li class="connexionLinks" style="color:white;"> (compte: enseignant)</li>
+                                }
+                                else
+                                {
+                                    <li class="connexionLinks" style="color:white;"> (compte: étudiant)</li>
+                                }
                             }
                         }
                     </ul>
