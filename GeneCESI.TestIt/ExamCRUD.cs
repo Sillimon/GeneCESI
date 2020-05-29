@@ -14,9 +14,9 @@ namespace GeneCESI.TestIt
     [TestClass]
     class ExamCRUD
     {
-        static IRepository<Exam> _examRepo = new ExamRepository(new SqliteConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
+        static IRepository<Exam> _examRepo = new ExamRepository(new SqliteConnection(@"Data Source=" +
            Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))) +
-           @"\GeneCESI_BDD.mdf;Integrated Security=True;Connect Timeout=30"));
+           @"\GeneCESI_DB.db;"));
 
         [TestMethod]
         public bool ExamAdd()

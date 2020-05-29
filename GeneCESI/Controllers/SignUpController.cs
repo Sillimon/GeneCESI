@@ -12,9 +12,9 @@ namespace GeneCESI.Controllers
 {
     public class SignUpController : Controller
     {
-        UserRepository repoUser = new UserRepository(new SqliteConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
-            Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))) +
-            @"\GeneCESI_BDD.mdf;Integrated Security=True;Connect Timeout=30"));
+        UserRepository repoUser = new UserRepository(new SqliteConnection(@"Data Source=" +
+           Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))) +
+           @"\GeneCESI_DB.db;"));
 
         public ActionResult Index()
         {
