@@ -1,43 +1,69 @@
 ﻿@model GeneCESI.Lib.Objects.Exam_Questions_Answers
 
-@{
-    ViewBag.Title = "ListQuestions";
-}
+<h2>Création d'un examen</h2>
 
-<h2>ListQuestions</h2>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("GetCreatedExam","Question",FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <h4>@Html.LabelFor(model => model.exam.Label)</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @for (int i = 0; i < Model.exam.NbrQuestions; i++)
-        {
-            var count = i + 1;
-        <div class="form-group">
-           <div>Question @count</div>
-            @Html.DisplayFor(model => model.questions[i].Label)
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.questions[i].Label, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.exam.Label, "", new { @class = "text-danger" })
-        </div>
-        <div class="col-md-10">
-            @Html.DisplayFor(model => model.answers[i].Statements)
-        </div>
+<div class="form-horizontal">
 
-        </div>
-        }
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.DisplayFor(model => model.exam.Label)
+    
+
+    @for (int i = 0; i < Model.exam.NbrQuestions; i++)
+    {
+        var count = i + 1;
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div>Question @count</div>
+            @Html.DisplayFor(model => model.questions[i].Label)
+
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.questions[i].Label, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.exam.Label, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="col-md-10">
+                @if (Model.exam.ExamType == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.MultipleChoice)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        <p>@Html.EditorFor(modelItem => modelItem.questions[i].answers[j].Statements)</p>
+                        @Html.CheckBoxFor(modelItem => modelItem.questions[i].answers[j].isCorrect)
+                    }
+                }
+                else if (Model.exam.ExamType == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.YesNo)
+                {
+                    for (int j = 0; j < 2; j++)
+                    {
+                        <p><input type="radio" name="YesNo" /> @Html.EditorFor(modelItem => modelItem.questions[i].answers[j].Statements)</p>
+                    }
+                }
+                else if (Model.exam.ExamType == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.UniqueChoice)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        <p><input type="radio" name="UniqueChoice" /> @Html.EditorFor(modelItem => modelItem.questions[i].answers[j].Statements)</p>
+                    }
+                }
+                else if (Model.exam.ExamType == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.Textual)
+                {
+
+                }
+                else if (Model.exam.ExamType == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.Cloze)
+                {
+
+                }
             </div>
         </div>
-    </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
 </div>
+}

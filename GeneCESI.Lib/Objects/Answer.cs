@@ -12,6 +12,7 @@ namespace GeneCESI.Lib.Objects
         public string Correct { get; set; }
         public string Statements { get; set; }
 
+        public bool isCorrect { get; set; }
         public Answer() { }
         public Answer(string correct, string statements, int id = 0)
             => (this.Id, this.Correct, this.Statements) = (id, correct, statements);

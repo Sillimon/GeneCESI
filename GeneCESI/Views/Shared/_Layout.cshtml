@@ -26,7 +26,7 @@
                         @*<li class="connexionLinks">@Html.ActionLink("Se connecter", "Index", "SignIn")</li>
         <li class="connexionLinks">@Html.ActionLink("S'authentifier", "Index", "LogIn")</li>*@
                         <li class="connexionLinks">@Html.ActionLink("Evaluation", "DisplayExam", "Exam", new { idExamen = 1 }, htmlAttributes: null)</li>
-
+                        <li class="connexionLinks">@Html.ActionLink("TeacherIndex", "Index", "Teacher")</li>
                         @{
                             if (Session["Id"] != null)
                             {

@@ -10,6 +10,5 @@ namespace GeneCESI.Lib.Objects
     {
         public Exam exam { get; set; }
         public List<Question> questions { get; set; }
-        public List<Answer> answers { get; set; }
     }
 }
