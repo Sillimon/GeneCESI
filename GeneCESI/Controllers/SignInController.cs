@@ -23,19 +23,20 @@ namespace GeneCESI.Controllers
 
         public ActionResult ToLogin(string Email, string Password)
         {
-                if (repoUser.UserLoggin(Email,Password)!=null)
-                {
-                    Session["Id"] = repoUser.UserLoggin(Email, Password).Id;
-                    Session["Firstname"] = repoUser.UserLoggin(Email, Password).Firstname;
-                    Session["Email"] = repoUser.UserLoggin(Email, Password).Email;
-                    Session["Roles"] = repoUser.UserLoggin(Email, Password).Roles;
+            User user = repoUser.UserLoggin(Email, Password);
+            if (user != null)
+            {
+                Session["Id"] = user.Id;
+                Session["Firstname"] = user.Firstname;
+                Session["Email"] = user.Email;
+                Session["Roles"] = user.Roles;
 
                 return RedirectToAction("Index", "Home", new { area = "" });
-                }
-                else
-                {
-                    return Redirect("error");
-                }
+            }
+            else
+            {
+                return Redirect("error");
+            }
         }
 
         public ActionResult ToLogout()
