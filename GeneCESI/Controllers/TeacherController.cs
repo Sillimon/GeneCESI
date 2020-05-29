@@ -14,6 +14,7 @@ namespace GeneCESI.Controllers
     {
         public ActionResult Index()
         {
+            //Accès à la base de données
             ExamRepository repoExam = new ExamRepository(new SqlConnection(@"Data Source = (LocalDb)\MSSQLLocalDB;  Integrated Security=SSPI;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False; AttachDbFilename=" +
            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
            @"\GeneCESI_BDD.mdf;"));
