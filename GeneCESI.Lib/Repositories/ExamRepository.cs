@@ -1,9 +1,9 @@
 ﻿
 using GeneCESI.Lib.Objects;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,14 +44,14 @@ namespace GeneCESI.Lib.Repositories
         {
             try
             {
-                _command = new SqlCommand("INSERT INTO dbo.[Exams](Label, NbrQuestions, Time, End_Date, Tries) " +
-                    "VALUES(@Label, @NbrQuestions, @Time, @End_Date, @Tries)", _connection as SqlConnection);
+                _command = new SqliteCommand("INSERT INTO [Exams](Label, NbrQuestions, Time, End_Date, Tries) " +
+                    "VALUES(@Label, @NbrQuestions, @Time, @End_Date, @Tries)", _connection as SqliteConnection);
 
-                _command.Parameters.Add(new SqlParameter("@Label", entity.Label));
-                _command.Parameters.Add(new SqlParameter("@NbrQuestions", entity.NbrQuestions));
-                _command.Parameters.Add(new SqlParameter("@Time", entity.Time));
-                _command.Parameters.Add(new SqlParameter("@End_Date", entity.EndDate));
-                _command.Parameters.Add(new SqlParameter("@Tries", entity.Tries));
+                _command.Parameters.Add(new SqliteParameter("@Label", entity.Label));
+                _command.Parameters.Add(new SqliteParameter("@NbrQuestions", entity.NbrQuestions));
+                _command.Parameters.Add(new SqliteParameter("@Time", entity.Time));
+                _command.Parameters.Add(new SqliteParameter("@End_Date", entity.EndDate));
+                _command.Parameters.Add(new SqliteParameter("@Tries", entity.Tries));
 
                 _connection.Open();
                 _command.ExecuteNonQuery();
@@ -71,8 +71,8 @@ namespace GeneCESI.Lib.Repositories
         {
             try
             {
-                _command = new SqlCommand("DELETE FROM dbo.Exams WHERE Id = @ID", _connection as SqlConnection);
-                _command.Parameters.Add(new SqlParameter("@ID", entity.Id));
+                _command = new SqliteCommand("DELETE FROM Exams WHERE Id = @ID", _connection as SqliteConnection);
+                _command.Parameters.Add(new SqliteParameter("@ID", entity.Id));
 
                 _connection.Open();
                 _command.ExecuteNonQuery();
@@ -94,11 +94,11 @@ namespace GeneCESI.Lib.Repositories
 
             try
             {
-                _command = new SqlCommand("SELECT * FROM dbo.Exams WHERE Id = @ID", _connection as SqlConnection);
-                _command.Parameters.Add(new SqlParameter("@ID", id));
+                _command = new SqliteCommand("SELECT * FROM Exams WHERE Id = @ID", _connection as SqliteConnection);
+                _command.Parameters.Add(new SqliteParameter("@ID", id));
 
                 _connection.Open();
-                SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
+                SqliteDataReader results = _command.ExecuteReader() as SqliteDataReader;
 
                 while (results.Read())
                 {
@@ -125,10 +125,10 @@ namespace GeneCESI.Lib.Repositories
 
             try
             {
-                _command = new SqlCommand("SELECT * FROM dbo.Exams", _connection as SqlConnection);
+                _command = new SqliteCommand("SELECT * FROM Exams", _connection as SqliteConnection);
 
                 _connection.Open();
-                SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
+                SqliteDataReader results = _command.ExecuteReader() as SqliteDataReader;
 
                 while (results.Read())
                     exams.Add(ReaderToObject(results));

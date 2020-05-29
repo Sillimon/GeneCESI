@@ -1,8 +1,9 @@
 ﻿using GeneCESI.Lib.Objects;
 using GeneCESI.Lib.Repositories;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,7 +12,9 @@ namespace GeneCESI.Controllers
 {
     public class SignInController : Controller
     {
-        UserRepository repoUser = new UserRepository(new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=genecesi1;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+        UserRepository repoUser = new UserRepository(new SqliteConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
+            Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))) +
+            @"\GeneCESI_BDD.mdf;Integrated Security=True;Connect Timeout=30"));
 
         public ActionResult Index()
         {

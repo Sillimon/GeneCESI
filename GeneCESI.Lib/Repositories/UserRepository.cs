@@ -1,9 +1,9 @@
 ﻿using GeneCESI.Lib.Helpers;
 using GeneCESI.Lib.Objects;
+using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,14 +43,14 @@ namespace GeneCESI.Lib.Repositories
         {
             try
             {
-                _command = new SqlCommand("INSERT INTO dbo.[Users](Name, Firstname, Roles, Email, Password) " +
-                    "VALUES(@Name, @Firstname, @Roles, @Email, @Password)", _connection as SqlConnection);
+                _command = new SqliteCommand("INSERT INTO [Users](Name, Firstname, Roles, Email, Password) " +
+                    "VALUES(@Name, @Firstname, @Roles, @Email, @Password)", _connection as SqliteConnection);
 
-                _command.Parameters.Add(new SqlParameter("@Name", entity.Name));
-                _command.Parameters.Add(new SqlParameter("@Firstname", entity.Firstname));
-                _command.Parameters.Add(new SqlParameter("@Roles", entity.Roles));
-                _command.Parameters.Add(new SqlParameter("@Email", entity.Email));
-                _command.Parameters.Add(new SqlParameter("@Password", CommonHelpers.ComputeHash(entity.Password)));
+                _command.Parameters.Add(new SqliteParameter("@Name", entity.Name));
+                _command.Parameters.Add(new SqliteParameter("@Firstname", entity.Firstname));
+                _command.Parameters.Add(new SqliteParameter("@Roles", entity.Roles));
+                _command.Parameters.Add(new SqliteParameter("@Email", entity.Email));
+                _command.Parameters.Add(new SqliteParameter("@Password", CommonHelpers.ComputeHash(entity.Password)));
 
                 _connection.Open();
                 _command.ExecuteNonQuery();
@@ -70,8 +70,8 @@ namespace GeneCESI.Lib.Repositories
         {
             try
             {
-                _command = new SqlCommand("DELETE FROM dbo.Users WHERE Id = @ID", _connection as SqlConnection);
-                _command.Parameters.Add(new SqlParameter("@ID", entity.Id));
+                _command = new SqliteCommand("DELETE FROM Users WHERE Id = @ID", _connection as SqliteConnection);
+                _command.Parameters.Add(new SqliteParameter("@ID", entity.Id));
 
                 _connection.Open();
                 _command.ExecuteNonQuery();
@@ -94,11 +94,11 @@ namespace GeneCESI.Lib.Repositories
 
             try
             {
-                _command = new SqlCommand("SELECT * FROM dbo.Users WHERE Id = @ID", _connection as SqlConnection);
-                _command.Parameters.Add(new SqlParameter("@ID", id));
+                _command = new SqliteCommand("SELECT * FROM Users WHERE Id = @ID", _connection as SqliteConnection);
+                _command.Parameters.Add(new SqliteParameter("@ID", id));
 
                 _connection.Open();
-                SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
+                SqliteDataReader results = _command.ExecuteReader() as SqliteDataReader;
 
                 while (results.Read())
                 {
@@ -125,10 +125,10 @@ namespace GeneCESI.Lib.Repositories
 
             try
             {
-                _command = new SqlCommand("SELECT * FROM dbo.Users", _connection as SqlConnection);
+                _command = new SqliteCommand("SELECT * FROM Users", _connection as SqliteConnection);
 
                 _connection.Open();
-                SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
+                SqliteDataReader results = _command.ExecuteReader() as SqliteDataReader;
 
                 while (results.Read())
                     users.Add(ReaderToObject(results));
@@ -154,12 +154,12 @@ namespace GeneCESI.Lib.Repositories
             User loggingInUser = new User();
             try
             {
-                _command = new SqlCommand("SELECT * FROM dbo.Users WHERE Email = @email AND Password = @password", _connection as SqlConnection);
-                _command.Parameters.Add(new SqlParameter("@email", email));
-                _command.Parameters.Add(new SqlParameter("@password", CommonHelpers.ComputeHash(password)));
+                _command = new SqliteCommand("SELECT * FROM Users WHERE Email = @email AND Password = @password", _connection as SqliteConnection);
+                _command.Parameters.Add(new SqliteParameter("@email", email));
+                _command.Parameters.Add(new SqliteParameter("@password", CommonHelpers.ComputeHash(password)));
 
                 _connection.Open();
-                SqlDataReader results = _command.ExecuteReader() as SqlDataReader;
+                SqliteDataReader results = _command.ExecuteReader() as SqliteDataReader;
 
                 if (!results.HasRows)
                     return null;

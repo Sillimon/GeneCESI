@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using GeneCESI.Lib.Objects;
 using GeneCESI.Lib.Repositories;
+using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GeneCESI.TestIt
@@ -12,7 +12,7 @@ namespace GeneCESI.TestIt
     [TestClass]
     public class UserCRUD
     {
-        static IRepository<User> _userRepo = new UserRepository(new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
+        static IRepository<User> _userRepo = new UserRepository(new SqliteConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
             Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))) + 
             @"\GeneCESI_BDD.mdf;Integrated Security=True;Connect Timeout=30"));
 
