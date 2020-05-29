@@ -1,9 +1,9 @@
 ﻿using GeneCESI.Lib.Objects;
 using GeneCESI.Lib.Repositories;
-using Microsoft.Data.Sqlite;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -14,9 +14,9 @@ namespace GeneCESI.TestIt
     [TestClass]
     class QuestionCRUD
     {
-        static IRepository<Question> _questionRepo = new QuestionRepository(new SqliteConnection(@"Data Source=" +
+        static IRepository<Question> _questionRepo = new QuestionRepository(new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
            Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))) +
-           @"\GeneCESI_DB.db;"));
+           @"\GeneCESI_BDD.mdf;Integrated Security=True;Connect Timeout=30"));
 
         [TestMethod]
         public bool QuestionAdd()
