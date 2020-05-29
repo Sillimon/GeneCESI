@@ -14,9 +14,9 @@ namespace GeneCESI.TestIt
     [TestClass]
     class AnswerCRUD
     {
-        static IRepository<Answer> _answerRepo = new AnswerRepository(new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
-           Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))) +
-           @"\GeneCESI_BDD.mdf;Integrated Security=True;Connect Timeout=30"));
+        static IRepository<Answer> _answerRepo = new AnswerRepository(new SqlConnection(@"Data Source = (LocalDb)\MSSQLLocalDB; Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False; AttachDbFilename=" +
+           Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+           @"\GeneCESI_BDD.mdf;"));
 
         [TestMethod]
         public bool AnswerAdd()

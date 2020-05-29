@@ -12,9 +12,9 @@ namespace GeneCESI.TestIt
     [TestClass]
     public class UserCRUD
     {
-        static IRepository<User> _userRepo = new UserRepository(new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" +
-            Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory()))) + 
-            @"\GeneCESI_BDD.mdf;Integrated Security=True;Connect Timeout=30"));
+        static IRepository<User> _userRepo = new UserRepository(new SqlConnection(@"Data Source = (LocalDb)\MSSQLLocalDB;  Integrated Security=SSPI;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False; AttachDbFilename=" +
+           Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+           @"\GeneCESI_BDD.mdf;"));
 
         [TestMethod]
         public bool UserAdd()
