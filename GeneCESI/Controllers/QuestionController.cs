@@ -37,6 +37,7 @@ namespace GeneCESI.Controllers
             return View();
         }
 
+        [HttpPost]
         public ActionResult GetCreatedExam(Exam_Questions_Answers model)
         {
             Exam exam = TempData["exam"] as Exam;
