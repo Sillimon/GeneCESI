@@ -33,22 +33,22 @@
     else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.UniqueChoice)
     {
         foreach (var x in listStatement)
-        {<p><input type="radio" name="UniqueChoice" /> @Html.DisplayFor(modelItem => x)</p>@Html.HiddenFor(modelItem => x)}
+        {<p><input type="radio" name="UniqueChoice" /> @Html.DisplayFor(modelItem => x)</p>}
 }
 else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.MultipleChoice)
 {
     foreach (var x in listStatement)
-    {<p><input type="checkbox" name="MultipleChoice" /> @Html.DisplayFor(modelItem => x)</p>@Html.HiddenFor(modelItem => x)}
+    {<p><input type="checkbox" name="MultipleChoice" /> @Html.DisplayFor(modelItem => x)</p>}
 }
 else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.Textual)
 {
 foreach (var x in listStatement)
-{<p><input type="text" name="Textual" /> @Html.DisplayFor(modelItem => x)</p>@Html.HiddenFor(modelItem => x)}
+{<p><input type="text" name="Textual" /> @Html.DisplayFor(modelItem => x)</p>}
 }
 else if (item.Type == GeneCESI.Lib.Helpers.EnumHelper.QuestionType.Cloze)
 {
 foreach (var x in listStatement)
-{<p><input type="text" name="Cloze" /> @Html.DisplayFor(modelItem => x)</p>@Html.HiddenFor(modelItem => x)}
+{<p><input type="text" name="Cloze" /> @Html.DisplayFor(modelItem => x)</p>}
 }
     </div>
         }

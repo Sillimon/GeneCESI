@@ -17,6 +17,7 @@ namespace GeneCESI.Lib.Objects
         public Answer FK_Answers { get; set; }
 
         public Exam FK_Exam { get; set; }
+        public List<Answer> answers { get; set; }
 
         public Question() { }
         public Question(string label, QuestionType type, Answer answer, Exam exam, int id = 0)
